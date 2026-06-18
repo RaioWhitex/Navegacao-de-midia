@@ -1,0 +1,111 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #dceaf7;
+  min-height: 100vh;
+}
+
+/* Barra vertical fixa à esquerda */
+.barra {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.icones {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #ffffff;
+  padding: 14px 12px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: opacity 0.25s, transform 0.25s;
+  transform-origin: top center;
+}
+
+/* Estado fechado: esconde a lista de ícones */
+.barra:not(.aberta) .icones {
+  opacity: 0;
+  transform: scaleY(0);
+  pointer-events: none;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Cada ícone */
+.item {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+.item:hover { transform: scale(1.1); }
+
+/* Cores de marca */
+.pinterest { background: #e60023; }
+.linkedin  { background: #0a66c2; }
+.youtube   { background: #ff0000; }
+.dribbble  { background: #ea4c89; }
+.github    { background: #7c3aed; }
+.facebook  { background: #1877f2; }
+.twitter   { background: #1da1f2; }
+
+/* Tooltip com o nome */
+.item::after {
+  content: attr(data-nome);
+  position: absolute;
+  left: 56px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
+  background: #ffffff;
+  color: #444;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.item:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Botão fechar/abrir */
+.toggle {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #e60023;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  transition: background 0.2s, transform 0.15s;
+}
+.toggle:hover { transform: scale(1.08); }
+
+/* Quando fechado, vira botão roxo com + */
+.barra:not(.aberta) .toggle {
+  background: #7c3aed;
+}
